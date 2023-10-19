@@ -1,0 +1,78 @@
+using System;
+
+class ATM
+{
+    static double balance = 1000.0; // Başlangıç bakiyesi
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hoş geldiniz!");
+        while (true)
+        {
+            Console.WriteLine("\nLütfen işlem seçin:");
+            Console.WriteLine("1. Bakiye Sorgula");
+            Console.WriteLine("2. Para Çek");
+            Console.WriteLine("3. Para Yatır");
+            Console.WriteLine("4. Çıkış");
+
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    CheckBalance();
+                    break;
+                case 2:
+                    Withdraw();
+                    break;
+                case 3:
+                    Deposit();
+                    break;
+                case 4:
+                    Console.WriteLine("Teşekkür ederiz, çıkıyor.");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Geçersiz seçenek, tekrar deneyin.");
+                    break;
+            }
+        }
+    }
+
+    static void CheckBalance()
+    {
+        Console.WriteLine($"Bakiyeniz: ${balance:F2}");
+    }
+
+    static void Withdraw()
+    {
+        Console.Write("Çekmek istediğiniz miktarı girin: ");
+        double amount = double.Parse(Console.ReadLine());
+
+        if (amount > 0 && amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine($"Başarıyla ${amount:F2} çektiniz. Yeni bakiye: ${balance:F2}");
+        }
+        else
+        {
+            Console.WriteLine("Geçersiz miktar veya yetersiz bakiye.");
+        }
+    }
+
+    static void Deposit()
+    {
+        Console.Write("Yatırmak istediğiniz miktarı girin: ");
+        double amount = double.Parse(Console.ReadLine());
+
+        if (amount > 0)
+        {
+            balance += amount;
+            Console.WriteLine($"Başarıyla ${amount:F2} yatırdınız. Yeni bakiye: ${balance:F2}");
+        }
+        else
+        {
+            Console.WriteLine("Geçersiz miktar.");
+        }
+    }
+}
